@@ -1,0 +1,36 @@
+<br>
+
+<h4> THE FOLLOWING CODE SHOW THE TWO-WAY-DATA-BINDING !</h4>
+
+<p>{{actor.id}} ==> {{actor.name | uppercase}} </p>
+
+<br>
+
+<div>
+    <label>name:
+      <input [(ngModel)]="actor.name" placeholder="name"/>
+    </label>
+  </div>
+
+  <hr>
+
+  <ul>
+      <li *ngFor = "let actor of actorsList" (click)="onSelectActor(actor)">{{actor.id}}, {{actor.name}}</li>
+  </ul>
+
+
+  <hr>
+
+  <!--
+  <div *ngIf="selectedActor">
+      <h4>Details on the selected actor</h4>
+      {{selectedActor.name}}: {{selectedActor.detail}}
+  </div>
+    -->
+
+  <!-- "selectedActor" was setted with onSelector(actor), [selectedActor] is the @Input property in app-actorsdetails -->
+  <app-actorsdetails  [selectedActor]="selectedActor">
+
+  </app-actorsdetails>
+
+  

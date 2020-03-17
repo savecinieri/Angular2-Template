@@ -1,10 +1,7 @@
-<br>
+<nav> <a routerLink='/dashboard'> > GO TO THE WELCOME PAGE</a> </nav>
+<h4 align="center"> THE FOLLOWING CODE SHOW THE TWO-WAY-DATA-BINDING !</h4>
 
-<h4> THE FOLLOWING CODE SHOW THE TWO-WAY-DATA-BINDING !</h4>
-
-<p>{{actor.id}} ==> {{actor.name | uppercase}} </p>
-
-<br>
+<p>STARTING ACTOR that can be changed: {{actor.name | uppercase}} </p>
 
 <div>
     <label>name:
@@ -14,8 +11,9 @@
 
   <hr>
 
+  <h4 align="center">LIST OF ACTORS</h4>
   <ul>
-      <li *ngFor = "let actor of actorsList" (click)="onSelectActor(actor)">{{actor.id}}, {{actor.name}}</li>
+      <li *ngFor = "let actor of actorsList" (click)="onSelectActor(actor)">{{actor.id}}, {{actor.completeName}}</li>
   </ul>
 
 
@@ -30,7 +28,8 @@
 
   <!-- "selectedActor" was setted with onSelector(actor), [selectedActor] is the @Input property in app-actorsdetails -->
   <app-actorsdetails  [selectedActor]="selectedActor">
-
   </app-actorsdetails>
+
+  <app-messages></app-messages>
 
   

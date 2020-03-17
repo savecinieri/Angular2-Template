@@ -1,0 +1,18 @@
+<nav>
+
+    <button (click)='previousView()'> > GO BACK </button>
+
+</nav>
+
+<br>
+
+
+<div>
+
+    <ul>
+        <li *ngFor="let actor of this.actors">
+            <a routerLink='/detail/{{actor.id}}'>{{actor.completeName}}</a>
+        </li>
+    </ul>
+
+</div>

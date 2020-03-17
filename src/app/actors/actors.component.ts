@@ -37,7 +37,7 @@ export class ActorsComponent implements OnInit {
   }
 
   onSelectActor(actor){
-    this.messageService.addMessage("Actor selected: " + actor.name);
+    this.messageService.addMessage("Actor selected: " + actor.completeName);
     this.messageService.counterMessages += 1;
     debugger;
     this.selectedActor = actor;

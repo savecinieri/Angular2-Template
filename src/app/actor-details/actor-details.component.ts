@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ActorService } from '../actor.service';
 
 import { Location } from '@angular/common';  // used for backtrack routing
+import { Actor } from '../actor';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class ActorDetailsComponent implements OnInit {
 
   selectedId: number;
   selectedActorDetail: string;
+  selectedActor: Actor;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +32,8 @@ export class ActorDetailsComponent implements OnInit {
     this.selectedId = +this.route.snapshot.paramMap.get('id');
     console.log('Actor with Id: ' + this.selectedId);
 
-    this.actorService.getActorDetail(this.selectedId).subscribe(detailActor => this.selectedActorDetail = detailActor);
+    //this.actorService.getActorDetail(this.selectedId).subscribe(detailActor => this.selectedActorDetail = detailActor);
+    this.actorService.getActorDetail(this.selectedId).subscribe(detailActor => this.selectedActorDetail = detailActor.detail);
   }
 
   previousView(){

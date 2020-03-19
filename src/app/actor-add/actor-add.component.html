@@ -1,0 +1,39 @@
+<nav>
+
+    <button style="margin:5px;" (click)='previousView()'> > GO BACK </button>
+
+</nav>
+
+<div class="col-md-6" id="formForAdd">
+
+    <h2 class="text-center">Add Actor</h2>
+  
+    <form>
+  
+        <div class="form-group">
+  
+            <label for="completeName">Complete name:</label>
+  
+            <input [(ngModel)]="actorToBeAddedCN" placeholder="Complete name" name="complete name" class="form-control" id="completeName">
+  
+        </div>
+
+
+        <div class="form-group">
+  
+            <label for="completeDetail">Detail:</label>
+  
+            <input [(ngModel)]="actorToBeAddedD" placeholder="Detail" name="detail" class="form-control" id="detail">
+  
+        </div>
+
+        <button class="btn btn-success" (click)="AddActor()">Add actor</button>
+  
+    </form>
+  
+</div>
+
+
+<p>New name: {{this.actorToBeAddedCN}}</p>
+<p>New detail: {{this.actorToBeAddedD}}</p>
+

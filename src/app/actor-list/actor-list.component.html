@@ -1,18 +1,62 @@
 <nav>
 
-    <button (click)='previousView()'> > GO BACK </button>
+    <button style="margin:5px;" (click)='previousView()'> > GO BACK </button>
 
+    <button style="margin:5px;" routerLink='/addActor'> ADD ACTOR</button>
 </nav>
 
 <br>
 
+<div> <!-- class="iLB" -->
+    <div>
+
+        <table>
+            <ng-container *ngFor="let actor of this.actors">
+                <tr>
+                    <td> <a routerLink='/detail/{{actor.id}}'>{{actor.completeName}}</a> </td>
+                    <td> <button style="margin:5px;" (click)="openUpdateForm(actor)">Update complete name</button> </td>
+                    <td> <button style="margin:5px;" (click)="deleteActor(actor)">Delete actor</button> </td>
+                </tr>
+                
+            </ng-container>
+       </table>
+
+        <!--
+        <ul>
+            <li *ngFor="let actor of this.actors">
+                <a routerLink='/detail/{{actor.id}}'>{{actor.completeName}}</a>  
+                <button style="margin:5px;" (click)="openUpdateForm(actor)">Update complete name</button>
+                <button style="margin:5px;" (click)="deleteActor(actor)">Delete actor</button>
+            </li>
+        </ul>
+        -->
+
+    </div>
+
+    <!-- -->
+
+    <div *ngIf="this.updateMode !== false" class="col-md-6" id="formForUpdate">
+
+        <h2 class="text-center">Update Actor</h2>
+      
+        <form>
+      
+            <div class="form-group">
+      
+            <label for="completeName">Complete name:</label>
+      
+            <input [(ngModel)]="actorToBeUpdated.completeName" 
+                placeholder="Complete name" name="complete name" class="form-control" id="complteName">
+      
+        </div>
+
+        <button class="btn btn-success" (click)="UpdateCompleteName()">Update</button>
+      
+      </form>
+      
+    </div>
+    <!-- -->
+
 
 <div>
 
-    <ul>
-        <li *ngFor="let actor of this.actors">
-            <a routerLink='/detail/{{actor.id}}'>{{actor.completeName}}</a>
-        </li>
-    </ul>
-
-</div>

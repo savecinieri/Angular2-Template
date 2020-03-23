@@ -16,6 +16,9 @@ export class ActorListComponent implements OnInit {
   actorToBeUpdated: Actor;
   updateMode: boolean = false;
 
+  //to the the real server
+  returnedObj: Object[];
+
   constructor(
     private location: Location,
     private actorService : ActorService
@@ -51,6 +54,12 @@ export class ActorListComponent implements OnInit {
 
   previousView(){
     this.location.back();
+  }
+
+  postToServer(){
+    console.log("Request to the real server !!"); 
+    this.actorService.postToServer().subscribe((retObj) => { this.returnedObj = retObj;
+                          console.log(this.returnedObj);});
   }
 
 }

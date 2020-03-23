@@ -24,6 +24,9 @@ In app.module.ts:
   // put to update a record  RETURN AN OBSERVABLE
   // post to add RETURN AN OBSERVABLE
   // delete RETURN AN OBSERVABLE --> url containing id
+
+  // https://www.devglan.com/spring-boot/spring-boot-angular-example
+
 */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -40,6 +43,9 @@ export class ActorService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+
+  // for the real server
+  realUrl: string =  'http://localhost:8090/testUrl';
 
   constructor(
     private messageService: MessagesService,
@@ -106,7 +112,7 @@ export class ActorService {
     return this.http.delete<Actor>(url, this.httpOptions).pipe(
       //tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
       catchError(this.handleError<Actor>('addActor'))
-);
+    );
   }
 
   /**
@@ -130,6 +136,22 @@ export class ActorService {
   }
 
   //////*************
+
+  postToServer():Observable<any>{
+    console.log("Request inside the service");
+
+    //...........
+    //realOptions
+    let body = new FormData();
+    let actorTmp: Actor = null;
+    body.append('actorTmp', 'test_');
+
+
+    return this.http.post<any>(this.realUrl, new Actor('Joele', 'Smith4'), this.httpOptions).pipe(
+      //tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+      catchError(this.handleError<any>('postToServer'))
+    );
+  }
 
   addActor(actor){
     this.messageService.addMessage("Actor added: " + actor.name);

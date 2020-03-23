@@ -21,6 +21,9 @@ import { HttpClientModule }    from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 import { ActorAddComponent } from './actor-add/actor-add.component'; 
+import { ActorService } from './actor.service';
+
+const ENV = 'prod';
 
 @NgModule({
   declarations: [
@@ -34,21 +37,30 @@ import { ActorAddComponent } from './actor-add/actor-add.component';
     ActorAddComponent
   ],
   imports: [
-    HttpClientModule,
+    FormsModule,
+    BrowserModule,
+    HttpClientModule,  // for the requests to server
+    AppRoutingModule,
+    
 
     //**********************************************************************  PLEASE REMOVE WHEN NOT NECESSARY
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
+    /*   // USED FOR THE IN MEMORY DB
     HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
+    */
+    /*   //TEST
+    ENV !== 'prod' ? HttpClientInMemoryWebApiModule.forRoot(
         InMemoryDataService, { dataEncapsulation: false }
-    ),
-
-    FormsModule,
-    BrowserModule,
-    AppRoutingModule
+    ) : HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      passThruUnknownUrl: true
+    }),
+    */
   ],
-  providers: [],
+  providers: [],  // check if the services using httpClient shoud or not be specified
   bootstrap: [AppComponent]
 })
 export class AppModule { }

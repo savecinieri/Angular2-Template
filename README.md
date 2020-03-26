@@ -1,5 +1,9 @@
 # FirstApp
 
+##
+
+The main idea of this project is to represent the main concept of Angular 2+: routing, components, services, httpClient, two-way data binding etc.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
 
 ## Development server

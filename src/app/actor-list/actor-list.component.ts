@@ -12,8 +12,10 @@ import { Actor } from '../actor';
 })
 export class ActorListComponent implements OnInit {
 
+  // ----- RIGA 42 ----- //
+
   actors: Actor[]; // array of actors
-  actorToBeUpdated: Actor;
+  actorToBeUpdated: Actor;           
   updateMode: boolean = false;
 
   //to the the real server
@@ -26,29 +28,37 @@ export class ActorListComponent implements OnInit {
 
   ngOnInit(): void {
     //call getActors on the service
-    this.actorService.getAllActors().subscribe(actors => this.actors = actors);
+
+    this.actorService.readAllActors().subscribe(actors => this.actors = actors);
+    //this.actorService.getAllActors().subscribe(actors => this.actors = actors);
+
     //console.log("ALL THE ACTORS HAVE BEEN RETRIEVED !");
     // | async to display actors in html => NOT NECESSARY BECAUSE I'M USING SUBSCRIBE
   }
 
   openUpdateForm(actor){
+    this.actorToBeUpdated = Object.assign({}, actor);
+    // this.actorToBeUpdated.completeName = actor.completeName;
+    // this.actorToBeUpdated.detail = actor.detail;
+    // this.actorToBeUpdated.watcher = actor.watcher;
+    // this.actorToBeUpdated.id = actor.id;
+
     if(this.updateMode === false)
     {
       this.updateMode = true;
     }
-    this.actorToBeUpdated = actor;
   }
 
   UpdateCompleteName(){
     //call the service with its associated method
     this.updateMode = false;
-    this.actorService.UpdateActor(this.actorToBeUpdated).subscribe(() => { });
+    this.actorService.UpdateActor(this.actorToBeUpdated).subscribe(() => { this.actorService.readAllActors().subscribe(actors => this.actors = actors); });
   }
 
   deleteActor(actor){
     // NOTE THAT ONCE THE DELETE IS EXECUTED WE REFRESH THE ACTORS LIST
     this.actorService.DeleteActor(actor).subscribe(() => { 
-      this.actorService.getAllActors().subscribe(actors => this.actors = actors);
+      this.actorService.readAllActors().subscribe(actors => this.actors = actors);
     });
   }
 

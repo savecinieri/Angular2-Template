@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { MessagesService } from './messages.service';
 
-import { Actor } from './actor'; //interface used to represent the an actor
+import { Actor, ActorComplete } from './actor'; //interface used to represent the an actor
 
 /*
 In app.module.ts:
@@ -36,7 +36,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ActorService {
 
   actorsList = actors;
-  actorsListUsed: Actor[] = actors;  // use this if there isn't the server
+  // actorsListUsed: Actor[] = actors;  // use this if there isn't the server, ADD property "watcher: string"
   private actorsUrl = 'api/actors';  // actors is the collection wa want to retrieve, collection inside in-memory-data.service.ts
 
   // used for the examples with push, etc.
@@ -44,8 +44,11 @@ export class ActorService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  // for the real server
-  realUrl: string =  'http://localhost:8090/testUrl';
+  // url to reach the ControllerActorCRUD
+  url = "http://localhost:8080/ActorCRUD";
+
+  // for the real server, for test
+  realUrl: string =  'http://localhost:8080/testUrl';
 
   constructor(
     private messageService: MessagesService,
@@ -53,8 +56,51 @@ export class ActorService {
   
   }
 
+  // ----- CRUD METHODS ----- //  
+  readAllActors (): Observable<Actor[]>{
+    const urlSuffix = "readAllActors";
+    const readUrl = `${this.url}/${urlSuffix}`;
+    console.log(readUrl);
+    return this.http.get<Actor[]>(readUrl)
+      .pipe(
+        catchError(this.handleError<Actor[]>(urlSuffix, []))
+      );
+  }
 
-  /** GET actors from the server */
+  createActor (tmpActor: ActorComplete): Observable<Actor>{
+    const urlSuffix = "createActor";
+    const readUrl = `${this.url}/${urlSuffix}`;
+    console.log(readUrl);
+
+    return this.http.post<Actor>(readUrl, tmpActor, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Actor>(urlSuffix))
+      );
+  }
+
+  DeleteActor(actor: Actor): Observable<Actor>{
+    // const url = `${this.actorsUrl}/${actor.id}`;
+    const urlSuffix = "deleteActor";
+    const deleteUrl = `${this.url}/${urlSuffix}/${actor.id}`;
+
+    return this.http.delete<Actor>(deleteUrl, this.httpOptions).pipe(
+      //tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+      catchError(this.handleError<Actor>('deleteActor'))
+    );
+  }
+
+  UpdateActor(actor: Actor):Observable<Actor>{
+    const urlSuffix = "updateActor";
+    const updateUrl = `${this.url}/${urlSuffix}`;
+    console.log(updateUrl);
+
+    return this.http.put<Actor>(updateUrl, actor, this.httpOptions).pipe(
+       //tap(_ => this.log(`updated hero id=${hero.id}`)),
+       catchError(this.handleError<any>('updateActor'))
+     );
+   }
+
+  /* ----- GET actors from the server(DB IN MEMORY) ----- */
   getAllActors (): Observable<Actor[]> {
     this.messageService.addMessage("Main actor list retrieved");
     return this.http.get<Actor[]>(this.actorsUrl)
@@ -90,13 +136,15 @@ export class ActorService {
   }
   */
 
-
+ // ----- Update using IN MEMORY DB ----- //
+ /*
  UpdateActor(actor: Actor):Observable<Actor>{
    return this.http.put(this.actorsUrl, actor, this.httpOptions).pipe(
       //tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateActor'))
     );
   }
+  */
 
   
   AddActor(actor: Actor):Observable<Actor>{
@@ -107,6 +155,8 @@ export class ActorService {
     );
   }
 
+  // ----- Implemented at the top ----- //
+  /*
   DeleteActor(actor: Actor): Observable<Actor>{
     const url = `${this.actorsUrl}/${actor.id}`;
     return this.http.delete<Actor>(url, this.httpOptions).pipe(
@@ -114,6 +164,7 @@ export class ActorService {
       catchError(this.handleError<Actor>('addActor'))
     );
   }
+  */
 
   /**
   * Handle Http operation that failed.

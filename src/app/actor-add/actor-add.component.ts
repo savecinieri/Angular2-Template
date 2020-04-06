@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';  // used for backtrack routing
 import { ActorService } from '../actor.service';
 
-import { Actor } from '../actor';
+import { Actor, ActorComplete } from '../actor';
 
 @Component({
   selector: 'app-actor-add',
@@ -29,7 +29,8 @@ export class ActorAddComponent implements OnInit {
     debugger;
     if(this.actorToBeAddedCN || this.actorToBeAddedD)
     {
-      this.actorService.AddActor(new Actor(this.actorToBeAddedCN, this.actorToBeAddedD)).subscribe(() => {});;
+      this.actorService.createActor(new ActorComplete(this.actorToBeAddedCN, this.actorToBeAddedD, 'Saverio Cinieri')).subscribe(() => {});;
+      //this.actorService.AddActor(new ActorComplete(this.actorToBeAddedCN, this.actorToBeAddedD)).subscribe(() => {});
     }
     else
     {

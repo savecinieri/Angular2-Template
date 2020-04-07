@@ -24,20 +24,10 @@
                 <tr *ngFor="let actor of this.actors">
                     <td> <a routerLink='/detail/{{actor.id}}'>{{actor.completeName}}</a> </td>
                     <td> <button type="button" class="btn" style="margin:5px;" (click)="openUpdateForm(actor)"  data-toggle="modal" data-target="#modalUpdActor">Update complete name</button> </td>
-                    <td> <button type="button" class="btn" style="margin:5px;" (click)="deleteActor(actor)">Delete actor</button> </td>
+                    <td> <button type="button" class="btn" style="margin:5px;" (click)="setActorToBeDeleted(actor)">Delete actor</button> </td>
                 </tr>
             </tbody>
        </table>
-
-        <!--
-        <ul>
-            <li *ngFor="let actor of this.actors">
-                <a routerLink='/detail/{{actor.id}}'>{{actor.completeName}}</a>  
-                <button style="margin:5px;" (click)="openUpdateForm(actor)">Update complete name</button>
-                <button style="margin:5px;" (click)="deleteActor(actor)">Delete actor</button>
-            </li>
-        </ul>
-        -->
 
     </div>
 
@@ -65,7 +55,61 @@
     </div>
     -->
 
-    <!-- //-------------- Modal--------------// -->
+    
+    <div *ngIf="this.actorToBeDeleted != null" id="confDeleteActorAlert" class="alert alert-warning alert-dismissible center-block"
+            style="width: 40%;" role="alert">
+        <!-- X on top-right corner
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        -->
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <strong>Warning!</strong> Do you want to delete the actor {{this.actorToBeDeleted.completeName}} ?
+            </div>
+        </div>
+
+        <div class="row  mytop-buffer">
+            <div class="col-md-6 text-center">
+                <button class="btn btn-success" (click)="deleteActor()">Delete</button>
+            </div>
+            <div class="col-md-6 text-center">
+                <button class="btn btn-danger" (click)="dontConfirmDelete()">NOT DELETE</button>
+            </div>
+        </div>
+
+            
+
+    </div>
+    
+
+    <!-- any modal must be connected to a button or a link -->
+
+    <!-- //-------------- MODAL WITH ALERT --------------// -->
+    <!--
+    <div id="modalConfDeleteActor" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div *ngIf="this.actorToBeDeleted != null" class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Warning!</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-warning">
+                        Do you want to deleted the actor {{this.actorToBeDeleted}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="deleteActor()">Confirm delete </button>
+                </div>
+            </div>
+        </div>
+    <div>
+    -->
+
+
+
+    <!-- //-------------- MODAL TO UPDATE ACTOR --------------// -->
     <div id="modalUpdActor" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -98,6 +142,9 @@
             </div>
         </div>
     <div>
+
+
+    
 
 <div>
 

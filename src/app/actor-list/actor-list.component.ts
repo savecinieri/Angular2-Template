@@ -50,6 +50,8 @@ export class ActorListComponent implements OnInit {
   }
 
   UpdateCompleteName(){
+    // open popup
+
     //call the service with its associated method
     this.updateMode = false;
     this.actorService.UpdateActor(this.actorToBeUpdated).subscribe(() => { this.actorService.readAllActors().subscribe(actors => this.actors = actors); });

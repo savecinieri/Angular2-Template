@@ -9,18 +9,24 @@
 
 <br>
 
-<div> <!-- class="iLB" -->
+<div class="container-fluid"> <!-- class="iLB" -->
     <div>
 
-        <table>
-            <ng-container *ngFor="let actor of this.actors">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td> <a routerLink='/detail/{{actor.id}}'>{{actor.completeName}}</a> </td>
-                    <td> <button style="margin:5px;" (click)="openUpdateForm(actor)">Update complete name</button> </td>
-                    <td> <button style="margin:5px;" (click)="deleteActor(actor)">Delete actor</button> </td>
+                  <th>Complete name</th>
+                  <th>Update</th>
+                  <th>Delete</th>
                 </tr>
-                
-            </ng-container>
+            </thead>
+            <tbody>
+                <tr *ngFor="let actor of this.actors">
+                    <td> <a routerLink='/detail/{{actor.id}}'>{{actor.completeName}}</a> </td>
+                    <td> <button type="button" class="btn" style="margin:5px;" (click)="openUpdateForm(actor)"  data-toggle="modal" data-target="#modalUpdActor">Update complete name</button> </td>
+                    <td> <button type="button" class="btn" style="margin:5px;" (click)="deleteActor(actor)">Delete actor</button> </td>
+                </tr>
+            </tbody>
        </table>
 
         <!--
@@ -35,21 +41,21 @@
 
     </div>
 
-    <!-- -->
-
-    <div *ngIf="this.updateMode !== false" class="col-md-6" id="formForUpdate">
+    <!-- UPDATE FORM IN THE OLD WAY(WITHOUT MODAL) -->
+    <!--
+    <div *ngIf="this.updateMode !== false" id="formForUpdate">
 
         <h2 class="text-center">Update Actor</h2>
       
         <form>
       
-            <div class="form-group">
-      
-                <label for="completeName">Complete name:</label>
-      
-                <input [(ngModel)]="this.actorToBeUpdated.completeName" 
-                placeholder="Complete name" name="complete name" class="form-control" id="complteName">
-      
+            <div class="form-group row">
+                <div class="col-xs-4">
+                    <label for="completeName">Complete name:</label>
+        
+                    <input [(ngModel)]="this.actorToBeUpdated.completeName" 
+                    placeholder="Complete name" name="complete name" class="form-control" id="complteName">
+                </div>
             </div>
 
             <button class="btn btn-success" (click)="UpdateCompleteName()">Update</button>
@@ -57,8 +63,41 @@
         </form>
       
     </div>
-    <!-- -->
+    -->
 
+    <!-- //-------------- Modal--------------// -->
+    <div id="modalUpdActor" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div  *ngIf="this.updateMode !== false" class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update actor's name: {{this.actorToBeUpdated.completeName}}</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- content containing the form for the update and built using bootstrap blocks -->
+                    <form>
+      
+                        <div class="form-group row">
+                            <div class="col-xs-4 text-center">
+                                <label for="completeName">Complete name:</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <div>
+                                    <input [(ngModel)]="this.actorToBeUpdated.completeName" 
+                                    placeholder="Complete name" name="complete name" class="form-control" id="complteName">
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="UpdateCompleteName()">Update</button>
+                </div>
+            </div>
+        </div>
+    <div>
 
 <div>
 

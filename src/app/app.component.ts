@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Famous american actors';
+  note = 'Start SpringBoot server !!';
 }

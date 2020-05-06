@@ -1,0 +1,42 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">American Actors App</a>
+          <ul class="nav navbar-nav">
+            <li><a style="margin:5px;" (click)='previousView()'>GO BACK</a></li>
+          </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 text-center" id="formLogin">
+
+            <h2 class="text-center">Login</h2>
+        
+            <form>
+        
+                <div class="form-group">
+        
+                    <label for="username">Username:</label>
+                    <input [(ngModel)]="username" placeholder="Username" name="username" class="form-control" id="idUsername">
+                
+                </div>
+
+
+                <div class="form-group">
+        
+                    <label for="password">Password:</label>
+                    <input [(ngModel)]="password" placeholder="Password" name="password" class="form-control" id="idPassword">
+
+                </div>
+
+                <button class="btn btn-success" (click)="login()">Login</button>
+        
+            </form>
+        
+        </div>
+    </div>
+</div>

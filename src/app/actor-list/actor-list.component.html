@@ -1,15 +1,19 @@
-<nav>
-
-    <button style="margin:5px;" (click)='previousView()'> > GO BACK </button>
-
-    <button style="margin:5px;" routerLink='/addActor'> ADD ACTOR</button>
-
-    <button style="margin:5px;" (click)='postToServer()'> REAL REQUEST</button>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">American Actors App</a>
+          <ul class="nav navbar-nav">
+            <li><a style="margin:5px;" (click)='previousView()'>GO BACK</a></li>
+            <li><a style="margin:5px;" routerLink='/addActor'> ADD ACTOR</a></li>
+            <li><a style="margin:5px;" (click)='postToServer()'> REAL REQUEST</a></li>
+          </ul>
+        </div>
+    </div>
 </nav>
 
 <br>
 
-<div class="container-fluid"> <!-- class="iLB" -->
+<div class="container-fluid" id="actor-list container"> <!-- class="iLB" -->
     <div>
 
         <table class="table">
@@ -113,7 +117,7 @@
     <div id="modalUpdActor" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
-            <div  *ngIf="this.updateMode !== false" class="modal-content">
+            <div *ngIf="this.updateMode !== false" class="modal-content"> <!--*ngIf="this.updateMode !== false"-->
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Update actor's name: {{this.actorToBeUpdated.completeName}}</h4>

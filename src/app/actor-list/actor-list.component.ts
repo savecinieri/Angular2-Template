@@ -40,26 +40,26 @@ export class ActorListComponent implements OnInit {
     // | async to display actors in html => NOT NECESSARY BECAUSE I'M USING SUBSCRIBE
 
     $('#confDeleteActorAlert').hide();
+    $('#modalUpdActor').hide();
   }
 
   openUpdateForm(actor){
     this.actorToBeUpdated = Object.assign({}, actor);
-    // this.actorToBeUpdated.completeName = actor.completeName;
-    // this.actorToBeUpdated.detail = actor.detail;
-    // this.actorToBeUpdated.watcher = actor.watcher;
-    // this.actorToBeUpdated.id = actor.id;
+
 
     if(this.updateMode === false)
     {
       this.updateMode = true;
     }
+    
   }
 
   UpdateCompleteName(){
-    // open popup
-
-    //call the service with its associated method
+    //close the bootstrap modal
     this.updateMode = false;
+    $('#actor-list container').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    //call the service with its associated method
     this.actorService.UpdateActor(this.actorToBeUpdated).subscribe(() => { this.actorService.readAllActors().subscribe(actors => this.actors = actors); });
   }
 

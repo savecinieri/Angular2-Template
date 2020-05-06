@@ -8,6 +8,7 @@ import { ActorsComponent } from './actors/actors.component';
 import { ActorListComponent } from './actor-list/actor-list.component';
 import { ActorDetailsComponent } from './actor-details/actor-details.component';
 import { ActorAddComponent } from './actor-add/actor-add.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   // new routes
   { path: 'actorsList', component: ActorListComponent},
   { path: 'detail/:id', component: ActorDetailsComponent}, // HOW TO PASS A PARAMETER WITH ROUTING
-  { path: 'addActor', component: ActorAddComponent}
+  { path: 'addActor', component: ActorAddComponent},
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

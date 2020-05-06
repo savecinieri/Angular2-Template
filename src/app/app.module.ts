@@ -22,6 +22,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 import { ActorAddComponent } from './actor-add/actor-add.component'; 
 import { ActorService } from './actor.service';
+import { LoginComponent } from './login/login.component';
 
 const ENV = 'prod';
 
@@ -34,7 +35,8 @@ const ENV = 'prod';
     DashboardComponent,
     ActorListComponent,
     ActorDetailsComponent,
-    ActorAddComponent
+    ActorAddComponent,
+    LoginComponent
   ],
   imports: [
     FormsModule,
